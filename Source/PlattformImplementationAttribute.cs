@@ -2,7 +2,8 @@
 
 namespace CrossPlattformUtils
 {
-    public class PlattformImplementationAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class PlattformImplementationAttribute : Attribute
     {
         public PlattformImplementationAttribute(Platform platform)
         {
