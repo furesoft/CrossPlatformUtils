@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace CrossPlattformUtils
 {
-    public static class Allocator
+    public static class Instance
     {
         public static T New<T>(params object[] args)
         {

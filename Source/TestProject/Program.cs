@@ -9,7 +9,7 @@ namespace TestProject
         {
             Injector.Add<IOutputWriter, ConsoleOutput>();
 
-            var messageImpl = Allocator.New<ITerminalMessage>();
+            var messageImpl = Instance.New<ITerminalMessage>();
 
             Console.WriteLine(messageImpl.Message);
             Console.ReadLine();
