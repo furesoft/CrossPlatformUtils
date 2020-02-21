@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>CrossPlattformUtils</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Furesoft</Company>
+    <Authors>Furesoft</Authors>
+    <RepositoryUrl>https://github.com/furesoft/CrossPlatformUtils</RepositoryUrl>
+    <PackageId>Furesoft.CrossPlattformUtils</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestProject\**" />
+    <EmbeddedResource Remove="TestProject\**" />
+    <None Remove="TestProject\**" />
+  </ItemGroup>
+
+</Project>
