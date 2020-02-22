@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace CrossPlattformUtils
 {
@@ -38,6 +39,27 @@ namespace CrossPlattformUtils
 
         private static Dictionary<Type, object> _objectMappings =
             new Dictionary<Type, object>();
+
+        public static void AutoCollect()
+        {
+            var ass = Assembly.GetEntryAssembly();
+            var types = ass.GetTypes();
+            var filteredTypes = types.Where(_ => !_.IsAbstract || !_.IsInterface);
+
+            foreach (var t in filteredTypes)
+            {
+                var attr = t.GetCustomAttribute<InjectibleAttribute>();
+                if (attr != null)
+                {
+                    Add(attr.Interface, t);
+                }
+            }
+        }
+
+        private static void Add(Type t, Type v)
+        {
+            _mappings.Add(t, v);
+        }
 
         private static object Get(Type type)
         {

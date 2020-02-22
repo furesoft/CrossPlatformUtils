@@ -12,13 +12,14 @@ namespace TestProject
             var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
 
             // Rules for mapping loggers to targets
-            config.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, logconsole);
+            config.AddRule(LogLevel.Trace, LogLevel.Fatal, logconsole);
 
             // Apply config
             LogManager.Configuration = config;
 
-            Injector.Add<IOutputWriter, ConsoleOutput>();
+            //Injector.Add<IOutputWriter, ConsoleOutput>();
             Injector.Add<ILogger>(LogManager.GetCurrentClassLogger());
+            Injector.AutoCollect();
 
             var messageImpl = Instance.New<ITerminalMessage>();
 
