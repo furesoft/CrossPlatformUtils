@@ -1,4 +1,4 @@
-﻿using CrossPlattformUtils;
+﻿using CrossPlattform;
 
 namespace TestProject
 {
@@ -7,11 +7,12 @@ namespace TestProject
     {
         private readonly IOutputWriter output;
 
-        public LinuxTerminalMessage(IOutputWriter output)
+        public LinuxTerminalMessage(IOutputWriter output, ILogger logger)
         {
             this.output = output;
 
             output.Write("Hello from Linux");
+            logger.Log("all works fine");
         }
         public string Message => "im on linux";
     }

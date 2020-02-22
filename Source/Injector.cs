@@ -4,10 +4,13 @@ using System.Linq;
 
 namespace CrossPlattformUtils
 {
-    public static class Injector
+   public static class Injector
     {
-        private static Dictionary<Type, Type> mappings
+        private static Dictionary<Type, Type> _mappings
             = new Dictionary<Type, Type>();
+
+        private static Dictionary<Type, object> _objectMappings =
+            new Dictionary<Type, object>();
 
         public static T Get<T>()
         {
@@ -24,29 +27,36 @@ namespace CrossPlattformUtils
         private static object Get(Type type)
         {
             var target = ResolveType(type);
-            var constructor = target.GetConstructors()[0];
-            var parameters = constructor.GetParameters();
+            var constructors = target.GetConstructors();
 
-            List<object> resolvedParameters = new List<object>();
-
-            foreach (var item in parameters)
+            if (constructors.Any())
             {
-                resolvedParameters.Add(Get(item.ParameterType));
+                var constructor = constructors.First();
+                var parameters = constructor.GetParameters();
+
+                List<object> resolvedParameters = new List<object>();
+
+                foreach (var item in parameters)
+                {
+                    resolvedParameters.Add(Get(item.ParameterType));
+                }
+
+                return constructor.Invoke(resolvedParameters.ToArray());
             }
 
-            return constructor.Invoke(resolvedParameters.ToArray());
+            return _objectMappings[type];
         }
 
         public static void Add<T>(object value)
         {
-            mappings.Add(typeof(T), value.GetType());
+            _objectMappings.Add(typeof(T), value);
         }
 
         private static Type ResolveType(Type type)
         {
-            if (mappings.Keys.Contains(type))
+            if (_mappings.Keys.Contains(type))
             {
-                return mappings[type];
+                return _mappings[type];
             }
 
             return type;
@@ -54,12 +64,12 @@ namespace CrossPlattformUtils
 
         public static void Add<T, V>() where V : T
         {
-            mappings.Add(typeof(T), typeof(V));
+            _mappings.Add(typeof(T), typeof(V));
         }
 
         public static void Clear()
         {
-            mappings.Clear();
+            _mappings.Clear();
         }
     }
 }
