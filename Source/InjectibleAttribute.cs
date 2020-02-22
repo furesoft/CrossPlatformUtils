@@ -9,6 +9,10 @@ namespace CrossPlattformUtils
             Interface = @interface;
         }
 
+        public InjectibleAttribute()
+        {
+
+        }
         public Type Interface { get; set; }
     }
 }
