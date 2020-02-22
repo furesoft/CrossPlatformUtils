@@ -1,11 +1,9 @@
-﻿using CrossPlattform;
-
-namespace TestProject
+﻿namespace TestProject
 {
     [PlattformImplementation(Platform.Windows)]
     public class WindowsTerminalMessage : ITerminalMessage
     {
-        private readonly IOutputWriter output;
+        public string Message => "im on windows";
 
         public WindowsTerminalMessage(IOutputWriter output, ILogger logger)
         {
@@ -14,6 +12,6 @@ namespace TestProject
             logger.Log("all works fine");
         }
 
-        public string Message => "im on windows";
+        private readonly IOutputWriter output;
     }
 }

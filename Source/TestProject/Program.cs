@@ -3,9 +3,9 @@ using System;
 
 namespace TestProject
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Injector.Add<IOutputWriter, ConsoleOutput>();
 

@@ -14,6 +14,24 @@ namespace CrossPlattformUtils
             return Injector.Get<T>(implementation);
         }
 
+        private static Platform GetCurrentPlatform()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return Platform.Windows;
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return Platform.Linux;
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return Platform.OSX;
+            }
+
+            return Platform.Windows;
+        }
+
         private static Type GetImplementationOf<T>(Platform currentPlatform)
         {
             var ass = Assembly.GetEntryAssembly();
@@ -39,24 +57,6 @@ namespace CrossPlattformUtils
             }
 
             throw new PlatformNotSupportedException();
-        }
-
-        private static Platform GetCurrentPlatform()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                return Platform.Windows;
-            }
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                return Platform.Linux;
-            }
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                return Platform.OSX;
-            }
-
-            return Platform.Windows;
         }
     }
 }

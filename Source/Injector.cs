@@ -4,13 +4,22 @@ using System.Linq;
 
 namespace CrossPlattformUtils
 {
-   public static class Injector
+    public static class Injector
     {
-        private static Dictionary<Type, Type> _mappings
-            = new Dictionary<Type, Type>();
+        public static void Add<T>(object value)
+        {
+            _objectMappings.Add(typeof(T), value);
+        }
 
-        private static Dictionary<Type, object> _objectMappings =
-            new Dictionary<Type, object>();
+        public static void Add<T, V>() where V : T
+        {
+            _mappings.Add(typeof(T), typeof(V));
+        }
+
+        public static void Clear()
+        {
+            _mappings.Clear();
+        }
 
         public static T Get<T>()
         {
@@ -23,6 +32,12 @@ namespace CrossPlattformUtils
         {
             return (T)Get(type);
         }
+
+        private static Dictionary<Type, Type> _mappings
+                                                    = new Dictionary<Type, Type>();
+
+        private static Dictionary<Type, object> _objectMappings =
+            new Dictionary<Type, object>();
 
         private static object Get(Type type)
         {
@@ -47,11 +62,6 @@ namespace CrossPlattformUtils
             return _objectMappings[type];
         }
 
-        public static void Add<T>(object value)
-        {
-            _objectMappings.Add(typeof(T), value);
-        }
-
         private static Type ResolveType(Type type)
         {
             if (_mappings.Keys.Contains(type))
@@ -60,16 +70,6 @@ namespace CrossPlattformUtils
             }
 
             return type;
-        }
-
-        public static void Add<T, V>() where V : T
-        {
-            _mappings.Add(typeof(T), typeof(V));
-        }
-
-        public static void Clear()
-        {
-            _mappings.Clear();
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using CrossPlattform;
-
-namespace TestProject
+﻿namespace TestProject
 {
     [PlattformImplementation(Platform.Linux)]
     public class LinuxTerminalMessage : ITerminalMessage
     {
-        private readonly IOutputWriter output;
+        public string Message => "im on linux";
 
         public LinuxTerminalMessage(IOutputWriter output, ILogger logger)
         {
@@ -14,6 +12,7 @@ namespace TestProject
             output.Write("Hello from Linux");
             logger.Log("all works fine");
         }
-        public string Message => "im on linux";
+
+        private readonly IOutputWriter output;
     }
 }
