@@ -1,4 +1,6 @@
-﻿namespace TestProject
+﻿using CrossPlattformUtils;
+
+namespace TestProject
 {
     [PlattformImplementation(Platform.Windows)]
     public class WindowsTerminalMessage : ITerminalMessage
