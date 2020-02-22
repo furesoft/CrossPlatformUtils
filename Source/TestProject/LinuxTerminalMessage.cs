@@ -1,4 +1,5 @@
 ﻿using CrossPlattformUtils;
+using NLog;
 
 namespace TestProject
 {
@@ -12,7 +13,7 @@ namespace TestProject
             this.output = output;
 
             output.Write("Hello from Linux");
-            logger.Log("all works fine");
+            logger.Debug("all works fine");
         }
 
         private readonly IOutputWriter output;
