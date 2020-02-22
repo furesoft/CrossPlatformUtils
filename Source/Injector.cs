@@ -51,14 +51,34 @@ namespace CrossPlattformUtils
                 var attr = t.GetCustomAttribute<InjectibleAttribute>();
                 if (attr != null)
                 {
-                    Add(attr.Interface, t);
+                    if (attr.Interface != null)
+                    {
+                        Add(attr.Interface, t);
+                    }
+                    else
+                    {
+                        var props = t.GetProperties();
+                        foreach (var p in props)
+                        {
+                            var pattr = p.GetCustomAttribute<InjectibleAttribute>();
+                            if (pattr != null)
+                            {
+                                Add(pattr.Interface, p.GetValue(null));
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        private static void Add(Type t, Type v)
+        public static void Add(Type t, Type v)
         {
             _mappings.Add(t, v);
+        }
+
+        public static void Add(Type t, object v)
+        {
+            _objectMappings.Add(t, v);
         }
 
         private static object Get(Type type)
