@@ -21,6 +21,7 @@ namespace TestProject
             Injector.Add<ILogger>(LogManager.GetCurrentClassLogger());
             Injector.AutoCollect();
 
+            // select automatic instance based on operating system
             var messageImpl = Instance.New<ITerminalMessage>();
 
             Console.WriteLine(messageImpl.Message);

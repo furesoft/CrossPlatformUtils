@@ -6,7 +6,7 @@ namespace CrossPlattformUtils
 {
     public static class Instance
     {
-        public static T New<T>(params object[] args)
+        public static T New<T>()
         {
             var currentPlatform = GetCurrentPlatform();
             var implementation = GetImplementationOf<T>(currentPlatform);
