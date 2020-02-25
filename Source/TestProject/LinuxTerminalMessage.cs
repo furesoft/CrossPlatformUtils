@@ -14,6 +14,7 @@ namespace TestProject
 
             output.Write("Hello from Linux");
             logger.Debug("all works fine");
+
         }
 
         private readonly IOutputWriter output;

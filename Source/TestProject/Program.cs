@@ -24,6 +24,13 @@ namespace TestProject
             // select automatic instance based on operating system
             var messageImpl = Instance.New<ITerminalMessage>();
 
+            foreach (var os in Instance.GetAvailablePlatformsForInstance<ITerminalMessage>())
+            {
+                Console.WriteLine(os);
+            }
+
+            Instance.AssertAllPlatformsImplemented<ITerminalMessage>();
+
             Console.WriteLine(messageImpl.Message);
             Console.ReadLine();
         }

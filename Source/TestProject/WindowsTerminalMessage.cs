@@ -19,6 +19,8 @@ namespace TestProject
             {
                 logger.Info(v);
             }
+
+            logger.Error("ERROR!");
         }
 
         private readonly IOutputWriter output;
