@@ -8,6 +8,10 @@
     <Authors>Furesoft</Authors>
     <RepositoryUrl>https://github.com/furesoft/CrossPlatformUtils</RepositoryUrl>
     <PackageId>Furesoft.CrossPlattformUtils</PackageId>
+    <Description>A little Framework to work on multiple Platforms with DI integration</Description>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
