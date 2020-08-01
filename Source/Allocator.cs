@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -16,8 +17,7 @@ namespace CrossPlattformUtils
 
         private static Type GetImplementationOf<T>(Platform currentPlatform)
         {
-            var ass = Assembly.GetEntryAssembly();
-            var types = ass.GetTypes();
+            var types = Assembly.GetEntryAssembly().GetTypes().Concat(Assembly.GetExecutingAssembly().GetTypes()).Concat(Assembly.GetCallingAssembly().GetTypes());
 
             foreach (var t in types)
             {
